@@ -9,12 +9,11 @@ Each file runs on its own (`python 1_rsa.py`) and prints a small worked example.
 | `exp2` | Classical symmetric ciphers | Caesar, Monoalphabetic, Vigenere, Playfair, Hill (2x2) |
 | `exp3` | Asymmetric cryptography | RSA, ElGamal, Diffie-Hellman, ECC |
 | `exp7` | Hashing and HMAC | MD5 / SHA-1 / SHA-256 / SHA-512, avalanche effect, file integrity, HMAC (built-in and manual) |
-| `exp8` | Digital signatures | ECDSA (P-256), RSA-PSS (3072-bit) |
+| `exp8` | Digital signatures (from scratch, only `hashlib`) | ECDSA (P-256 + SHA-256), RSA-PSS (SHA-256, MGF1, Miller-Rabin primes) |
 
 ## Requirements
 - Python 3.8+
-- Exp 1, 2, 3, 7: no extra packages
-- Exp 8: `pip install cryptography`
+- No extra packages: everything uses only the Python standard library (`hashlib`, `random`, `os`)
 
 ## Example keys used
 | Cipher | Key | Example |
