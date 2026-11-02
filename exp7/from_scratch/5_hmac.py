@@ -48,8 +48,6 @@ def changed_bits(hex_a, hex_b):                 # avalanche: how many bits diffe
 
 
 if __name__ == "__main__":
-    import hmac as std_hmac
-
     # RFC 4231 test case 2
     print("RFC 4231 vector OK:", hmac_bytes(b"Jefe", b"what do ya want for nothing?", "sha256").hex()
           == "5bdcc146bf60754e6a042426089575c75a003f089d2739839dec58b964ec3843")
@@ -58,8 +56,7 @@ if __name__ == "__main__":
     msg = b"Transfer Rs.5000 to Account 1234"
     for algo in BLOCK_SIZE:
         tag = hmac_bytes(key, msg, algo).hex()
-        same = tag == std_hmac.new(key, msg, algo).hexdigest()
-        print(f"HMAC-{algo:7} {len(tag) * 4:3} bits  matches hmac module: {same}")
+        print(f"HMAC-{algo:7} {len(tag) * 4:3} bits  {tag[:32]}...")
 
     tag = hmac_bytes(key, msg, "sha256").hex()
     print("\nverify original :", verify_mac(key, "sha256", msg, tag))                         # True

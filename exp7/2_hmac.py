@@ -1,5 +1,6 @@
 # ==============================================================
 # EXPERIMENT 7 : HMAC (Hash-based Message Authentication Code)
+#                built by hand - only hashlib (SHA-256) is used
 # ==============================================================
 # THEORY:
 #   HMAC = hash + SECRET KEY. Only someone with the key can make
@@ -17,23 +18,15 @@
 #   Why not just hash(key + message)? It is open to a
 #   "length extension attack"; the two-layer HMAC design prevents it.
 #   HMAC vs signature: HMAC uses ONE shared key -> no non-repudiation.
+#
+#   Check value (RFC 4231): HMAC-SHA256("Jefe", "what do ya want for nothing?")
+#     = 5bdcc146bf60754e6a042426089575c75a003f089d2739839dec58b964ec3843
 # ==============================================================
 
-import hmac
 import hashlib
 
 
-# --------------------------------------------------------------
-# hmac_sha256 : using Python's built-in hmac module
-# --------------------------------------------------------------
 def hmac_sha256(key, message):
-    return hmac.new(key.encode(), message.encode(), hashlib.sha256).hexdigest()
-
-
-# --------------------------------------------------------------
-# hmac_manual : HMAC built by hand from the formula
-# --------------------------------------------------------------
-def hmac_manual(key, message):
     block = 64                                  # SHA-256 block size in bytes
     key = key.encode()
     message = message.encode()
@@ -52,22 +45,28 @@ def hmac_manual(key, message):
     return hashlib.sha256(bytes(opad) + inner).hexdigest()      # H(K'^opad + inner)
 
 
-# --------------------------------------------------------------
-# verify : receiver recomputes the tag and compares
-# --------------------------------------------------------------
+def constant_time_equal(a, b):
+    # compare every character, so the time taken does not reveal where they differ
+    if len(a) != len(b):
+        return False
+    result = 0
+    for x, y in zip(a, b):
+        result = result | (ord(x) ^ ord(y))     # stays 0 only if all characters match
+    return result == 0
+
+
 def verify(key, message, tag):
-    return hmac.compare_digest(hmac_sha256(key, message), tag)
-    # compare_digest = safe comparison (takes the same time either way)
+    return constant_time_equal(hmac_sha256(key, message), tag)
 
 
 if __name__ == "__main__":
+    print("RFC 4231 check :", hmac_sha256("Jefe", "what do ya want for nothing?")
+          == "5bdcc146bf60754e6a042426089575c75a003f089d2739839dec58b964ec3843")   # True
+
     key = "secretkey"
     msg = "Transfer Rs.5000 to Account 1234"
-
     tag = hmac_sha256(key, msg)
-    print("HMAC (built-in):", tag)
-    print("HMAC (manual)  :", hmac_manual(key, msg))
-    print("same?          :", tag == hmac_manual(key, msg))                     # True
+    print("HMAC-SHA256    :", tag)
 
     print("\nverify original     :", verify(key, msg, tag))                      # True
     print("verify tampered msg :", verify(key, "Transfer Rs.9000 to Account 1234", tag))   # False
