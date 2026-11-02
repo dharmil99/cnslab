@@ -7,7 +7,7 @@ Each file runs on its own (`python 1_rsa.py`) and prints a small worked example.
 |---|---|---|
 | `exp1` | Probabilistic primality testing | Fermat, Euler, Miller-Rabin, modular power (square-and-multiply) |
 | `exp2` | Classical symmetric ciphers | Caesar, Monoalphabetic, Vigenere, Playfair, Hill (2x2), Hill (any n x n: 3x3, 4x4, ...) |
-| `exp3` | Asymmetric cryptography | RSA, ElGamal, Diffie-Hellman, ECC |
+| `exp3` | Asymmetric cryptography | RSA, ElGamal, Diffie-Hellman, ECC, Diffie-Hellman lab version (random 4-digit prime, generator, 100 exchanges) |
 | `exp7` | Hashing and HMAC | MD5 / SHA-1 / SHA-256 / SHA-512, avalanche effect, file integrity, HMAC built by hand |
 | `exp8` | Digital signatures (from scratch, only `hashlib`) | ECDSA (small Exp 3 curve, hand-checkable), RSA-PSS (simplest version); `full_versions/` has ECDSA on P-256 and standard-exact RSA-PSS |
 
