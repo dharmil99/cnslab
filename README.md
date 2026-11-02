@@ -11,6 +11,12 @@ Each file runs on its own (`python 1_rsa.py`) and prints a small worked example.
 | `exp7` | Hashing and HMAC | MD5 / SHA-1 / SHA-256 / SHA-512, avalanche effect, file integrity, HMAC (built-in and manual) |
 | `exp8` | Digital signatures (from scratch, only `hashlib`) | ECDSA (small Exp 3 curve, hand-checkable), RSA-PSS (simplest version); `full_versions/` has ECDSA on P-256 and standard-exact RSA-PSS |
 
+## Full lab submissions (single files)
+| File | What it is | Run |
+|---|---|---|
+| `exp7/exp7_submission_full.py` | Complete Exp 7 notebook as one script: MD5, SHA-1, SHA-256, SHA-512 and HMAC **from scratch**, self-test against published vectors, Parts A-I, graphs, Excel export | `python3 exp7/exp7_submission_full.py` (needs `pandas matplotlib openpyxl` and `Hash_and_MAC_Database.xlsx`) |
+| `exp8/exp8_submission_full.py` | Complete Exp 8 source code (common, crypto_ops, keygen, sign, verify, tamper, bench, plot + Dockerfile) as one script with sub-commands | `STUDENT_UID=2024300124 python3 exp8/exp8_submission_full.py keygen ecdsa` (needs `cryptography liboqs-python pandas matplotlib`) |
+
 ## Requirements
 - Python 3.8+
 - No extra packages: everything uses only the Python standard library (`hashlib`, `random`, `os`)
