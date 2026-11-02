@@ -11,6 +11,12 @@ Each file runs on its own (`python 1_rsa.py`) and prints a small worked example.
 | `exp7` | Hashing and HMAC | MD5 / SHA-1 / SHA-256 / SHA-512, avalanche effect, file integrity, HMAC (built-in and manual) |
 | `exp8` | Digital signatures (from scratch, only `hashlib`) | ECDSA (small Exp 3 curve, hand-checkable), RSA-PSS (simplest version); `full_versions/` has ECDSA on P-256 and standard-exact RSA-PSS |
 
+## One file per algorithm (from the lab submissions)
+| Folder | Files | Notes |
+|---|---|---|
+| `exp7/from_scratch/` | `1_md5.py`, `2_sha1.py`, `3_sha256.py`, `4_sha512.py`, `5_hmac.py` | Hashes written from scratch (padding + compression function); each checks itself against `hashlib`. HMAC built from the RFC 2104 formula for all four hashes. No extra packages. |
+| `exp8/with_libraries/` | `1_ecdsa.py`, `2_rsa_pss.py`, `3_ml_dsa.py`, `4_slh_dsa.py` | Same parameters as the submission (P-256, RSA-3072-PSS salt 32, ML-DSA-44, SLH-DSA-SHA2-128s). Needs `pip install cryptography liboqs-python`. |
+
 ## Full lab submissions (single files)
 | File | What it is | Run |
 |---|---|---|
